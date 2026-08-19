@@ -8,7 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=9">
     <!-- 카카오 지도 API SDK -->
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=031d3b882131f77219a686e25db0143b&libraries=services"></script>
+    <script type="text/javascript"
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=031d3b882131f77219a686e25db0143b&libraries=services"></script>
     <style>
         .loading-overlay {
             position: fixed;
@@ -167,32 +168,39 @@
                     `;
                 };
 
-                // Kakao Maps API SDK가 포함되어 있고 키가 유효한 경우
-                if (window.kakao && window.kakao.maps && window.kakao.maps.services) {
-                    try {
-                        const geocoder = new kakao.maps.services.Geocoder();
-                        geocoder.addressSearch(addressKo, function (result, status) {
-                            if (status === kakao.maps.services.Status.OK) {
-                                const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                                const map = new kakao.maps.Map(document.getElementById('map-container'), {
-                                    center: coords,
-                                    level: 3
-                                });
-                                const marker = new kakao.maps.Marker({
-                                    position: coords,
-                                    map: map
-                                });
-                                const infowindow = new kakao.maps.InfoWindow({
-                                    content: `<div style="padding:6px 10px;font-size:12px;font-weight:600;color:#111;word-break:keep-all;">${addressName}</div>`
-                                });
-                                infowindow.open(map, marker);
-                            } else {
+                // Kakao Maps API SDK가 로드된 경우
+                if (window.kakao && window.kakao.maps) {
+                    kakao.maps.load(function () {
+                        try {
+                            if (!kakao.maps.services) {
                                 renderKakaoCard(cleanAddress, addressName, searchUrl);
+                                return;
                             }
-                        });
-                    } catch (e) {
-                        renderKakaoCard(cleanAddress, addressName, searchUrl);
-                    }
+                            const geocoder = new kakao.maps.services.Geocoder();
+                            geocoder.addressSearch(addressKo, function (result, status) {
+                                if (status === kakao.maps.services.Status.OK) {
+                                    const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                    const map = new kakao.maps.Map(document.getElementById('map-container'), {
+                                        center: coords,
+                                        level: 3
+                                    });
+                                    const marker = new kakao.maps.Marker({
+                                        position: coords,
+                                        map: map
+                                    });
+                                    const infowindow = new kakao.maps.InfoWindow({
+                                        content: `<div style="padding:6px 10px;font-size:12px;font-weight:600;color:#111;word-break:keep-all;">${addressName}</div>`
+                                    });
+                                    infowindow.open(map, marker);
+                                } else {
+                                    renderKakaoCard(cleanAddress, addressName, searchUrl);
+                                }
+                            });
+                        } catch (e) {
+                            console.warn('Kakao map load error:', e);
+                            renderKakaoCard(cleanAddress, addressName, searchUrl);
+                        }
+                    });
                 } else {
                     renderKakaoCard(cleanAddress, addressName, searchUrl);
                 }
