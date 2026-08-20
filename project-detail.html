@@ -69,7 +69,7 @@
         // URL 파라미터에서 ID 가져오기
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('id');
-        const WP_API_URL = 'http://chinhyosook.com/wp-json/wp/v2';
+        const WP_API_URL = 'https://chinhyosook.com/wp-json/wp/v2';
 
         async function initProjectDetail() {
             if (!projectId) {
@@ -130,7 +130,7 @@
                 tempDiv.innerHTML = project.content.rendered;
                 const imgs = tempDiv.querySelectorAll('img');
                 imgs.forEach(img => {
-                    if (img.src) photoUrls.push(img.src);
+                    if (img.src) photoUrls.push(img.src.replace(/^http:\/\//i, 'https://'));
                 });
             }
 
@@ -145,6 +145,9 @@
                     fallbackImage = acf.featured_image_url.startsWith('./') ? `.${acf.featured_image_url}` : acf.featured_image_url;
                 } else if (acf.image_url) {
                     fallbackImage = acf.image_url.startsWith('./') ? `.${acf.image_url}` : acf.image_url;
+                }
+                if (fallbackImage && fallbackImage.startsWith('http://')) {
+                    fallbackImage = fallbackImage.replace(/^http:\/\//i, 'https://');
                 }
                 photoUrls.push(fallbackImage);
             }

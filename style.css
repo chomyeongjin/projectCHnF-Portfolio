@@ -415,6 +415,7 @@ body:has(.nav-links.active) .main-content {
     -webkit-backdrop-filter: blur(4px);
     pointer-events: none;
     /* Prevents overlay from capturing hover initially */
+    word-break: keep-all;
 }
 
 .grid-item:hover .hover-overlay {
@@ -430,6 +431,7 @@ body:has(.nav-links.active) .main-content {
     color: var(--text-color);
     transform: translateY(15px);
     transition: transform 0.4s ease;
+    word-break: keep-all;
 }
 
 .hover-overlay p {
@@ -438,6 +440,7 @@ body:has(.nav-links.active) .main-content {
     transform: translateY(15px);
     transition: transform 0.4s ease;
     transition-delay: 0.05s;
+    word-break: keep-all;
 }
 
 .grid-item:hover .hover-overlay h3,
@@ -850,7 +853,7 @@ body:has(.nav-links.active) .main-content {
 
 .about-content p {
     margin-bottom: 1.5rem;
-    text-align: justify;
+    text-align: left;
     word-break: keep-all;
 }
 

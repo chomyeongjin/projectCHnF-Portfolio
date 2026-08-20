@@ -59,7 +59,7 @@
         });
 
         // API Endpoints
-        const WP_API_URL = 'http://chinhyosook.com/wp-json/wp/v2';
+        const WP_API_URL = 'https://chinhyosook.com/wp-json/wp/v2';
 
         async function initLandingPage() {
             try {
@@ -85,6 +85,7 @@
                 const slidesResponse = await fetch(`${WP_API_URL}/landing?per_page=100&_embed`);
                 if (slidesResponse.ok) {
                     const slides = await slidesResponse.json();
+                    sortSlidesByNumber(slides);
                     renderSlides(slides);
                 } else {
                     document.getElementById('dynamic-carousel-track').innerHTML = '<div style="text-align:center; padding: 50px;">등록된 랜딩 이미지가 없습니다.</div>';
@@ -92,6 +93,25 @@
             } catch (error) {
                 console.error('Error fetching landing data:', error);
             }
+        }
+
+        // ACF number 필드 기준 정렬 (1, 2, 3... 오름차순, 미입력 항목은 뒤로 배치)
+        function sortSlidesByNumber(slides) {
+            slides.sort((a, b) => {
+                const numA = getSlideNumber(a);
+                const numB = getSlideNumber(b);
+
+                if (numA !== numB) {
+                    return numA - numB; // 오름차순 정렬 (1, 2, 3...)
+                }
+                return new Date(b.date || 0) - new Date(a.date || 0);
+            });
+        }
+
+        function getSlideNumber(slide) {
+            const acf = slide.acf || {};
+            const num = parseFloat(acf.number);
+            return isNaN(num) ? Infinity : num;
         }
 
         function renderSlides(slides) {
@@ -117,7 +137,7 @@
                 // 특성 이미지(Featured Image) 추출
                 let imageUrl = './sources/Logo.png';
                 if (slide._embedded && slide._embedded['wp:featuredmedia']) {
-                    imageUrl = slide._embedded['wp:featuredmedia'][0].source_url;
+                    imageUrl = slide._embedded['wp:featuredmedia'][0].source_url.replace(/^http:\/\//i, 'https://');
                 }
 
                 const slideHTML = `
