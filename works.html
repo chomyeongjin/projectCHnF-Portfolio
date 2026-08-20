@@ -349,16 +349,23 @@
 
         function applyFilters() {
             const allGridItems = document.querySelectorAll('.grid-item');
+            const hasLocationFilter = !activeLocations.has('all');
+            const hasTagFilter = !activeTags.has('all');
             
             allGridItems.forEach(item => {
                 const itemLocation = item.getAttribute('data-location');
                 const itemTag = item.getAttribute('data-tag');
-
-                const locationMatch = activeLocations.has('all') || activeLocations.has(itemLocation);
                 const itemTags = itemTag ? itemTag.split(',').map(t => t.trim()) : [];
-                const tagMatch = activeTags.has('all') || itemTags.some(t => activeTags.has(t));
 
-                if (locationMatch && tagMatch) {
+                if (!hasLocationFilter && !hasTagFilter) {
+                    item.classList.remove('hidden');
+                    return;
+                }
+
+                const locationMatch = hasLocationFilter && activeLocations.has(itemLocation);
+                const tagMatch = hasTagFilter && itemTags.some(t => activeTags.has(t));
+
+                if (locationMatch || tagMatch) {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
