@@ -240,7 +240,25 @@
             };
 
             setInitialPosition();
-            window.addEventListener('resize', setInitialPosition);
+
+            let lastWidth = window.innerWidth;
+            window.addEventListener('resize', () => {
+                const currentWidth = window.innerWidth;
+                if (currentWidth === lastWidth) return; // 모바일 스크롤시 주소창 변화로 인한 resize 시 위치 초기화 방지
+
+                const oldWidth = lastWidth;
+                lastWidth = currentWidth;
+
+                // 화면 폭 변경 시 기존에 보고 있던 슬라이드 위치 유지
+                const slideWidth = trackContainer.offsetWidth;
+                const currentIndex = Math.round(trackContainer.scrollLeft / oldWidth) || 1;
+                trackContainer.style.scrollSnapType = 'none';
+                trackContainer.scrollLeft = slideWidth * currentIndex;
+                setTimeout(() => {
+                    trackContainer.style.scrollSnapType = 'x mandatory';
+                }, 10);
+                updateDots();
+            });
 
             trackContainer.addEventListener('scroll', () => {
                 updateDots();
