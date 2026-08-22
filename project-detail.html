@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTFOLIO - Project Detail</title>
+    <title>Project CH&F - Works</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=6">
     <link rel="icon" type="image/png" href="./sources/favicon.png">
     <style>
         .loading-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: var(--bg-color);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; font-size: 1.2rem; color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            font-size: 1.2rem;
+            color: var(--text-color);
         }
     </style>
 </head>
 
 <body>
-    <div id="loading" class="loading-overlay">프로젝트 정보를 불러오는 중입니다...</div>
 
     <header class="header">
         <h1 class="logo"><a href="index.html"><img src="./sources/Logo.png" alt="Project CHnF"></a></h1>
@@ -81,7 +89,7 @@
             try {
                 const response = await fetch(`${WP_API_URL}/work/${projectId}?_embed`);
                 if (!response.ok) throw new Error('프로젝트를 찾을 수 없습니다.');
-                
+
                 const project = await response.json();
                 renderProject(project);
 
@@ -115,7 +123,7 @@
                 const terms = project._embedded['wp:term'].flat();
                 tags = terms.filter(t => t.taxonomy === 'work_tag').map(t => t.name);
             }
-            
+
             if (tags.length > 0) {
                 const tagsHTML = tags.map(t => `<span class="tag">#${t}</span>`).join('');
                 document.getElementById('project-tags').innerHTML = tagsHTML;
@@ -124,7 +132,7 @@
 
             // 3. 갤러리 렌더링 (워드프레스 본문 이미지 추출 활용)
             let photoUrls = [];
-            
+
             // 워드프레스 본문(에디터)에 올려둔 이미지들을 HTML에서 추출하여 캐러셀에 전달합니다.
             if (project.content && project.content.rendered) {
                 const tempDiv = document.createElement('div');
@@ -139,7 +147,7 @@
             if (photoUrls.length === 0) {
                 let fallbackImage = './sources/Logo.png';
                 const acfThumb = acf.thumbnail || acf.thumnail;
-                
+
                 if (acfThumb && typeof acfThumb === 'string') {
                     fallbackImage = acfThumb;
                 } else if (acf.featured_image_url) {
@@ -160,9 +168,10 @@
             });
 
             document.getElementById('detail-carousel-container').style.display = 'block';
-            
-            // 로딩 숨기기
-            document.getElementById('loading').style.display = 'none';
+
+            // 로딩 요소가 있으면 숨기기
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl) loadingEl.style.display = 'none';
 
             // 슬라이더 초기화
             initCarousel();
@@ -172,8 +181,8 @@
             const trackContainer = document.querySelector('.carousel-track-container');
             const track = document.querySelector('.carousel-track');
             const originalSlidesCount = track.children.length;
-            
-            if(originalSlidesCount <= 1) return; // 1장이면 무한루프 불필요
+
+            if (originalSlidesCount <= 1) return; // 1장이면 무한루프 불필요
 
             const slides = Array.from(track.children);
             const firstClone = slides[0].cloneNode(true);
@@ -284,4 +293,5 @@
         document.addEventListener('DOMContentLoaded', initProjectDetail);
     </script>
 </body>
+
 </html>

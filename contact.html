@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTFOLIO - Contact</title>
+    <title>Project CH&F - Contact</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=9">
     <link rel="icon" type="image/png" href="./sources/favicon.png">
@@ -30,9 +30,6 @@
 </head>
 
 <body>
-    <!-- 로딩 스크린 -->
-    <div id="loading" class="loading-overlay">연락처 정보를 불러오는 중입니다...</div>
-
     <header class="header">
         <h1 class="logo"><a href="index.html"><img src="./sources/Logo.png" alt="Project CHnF"></a></h1>
         <nav class="nav">
@@ -49,7 +46,7 @@
         </nav>
     </header>
 
-    <main class="main-content about-page" style="display: none;" id="main-content">
+    <main class="main-content about-page" id="main-content">
         <h2 class="about-title">Contact us</h2>
         <div class="about-content contact-layout">
             <div class="contact-top-row">
@@ -206,13 +203,13 @@
                     renderKakaoCard(cleanAddress, addressName, searchUrl);
                 }
 
-                // 4. 로딩 숨기고 진짜 컨텐츠 보여주기
-                document.getElementById('loading').style.display = 'none';
+                // 4. 컨텐츠 표시
+                const loadingEl = document.getElementById('loading');
+                if (loadingEl) loadingEl.style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
 
             } catch (error) {
                 console.error(error);
-                document.getElementById('loading').textContent = '데이터를 불러오는 중 에러가 발생했습니다.';
             }
         }
 

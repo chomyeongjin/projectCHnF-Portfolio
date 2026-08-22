@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A minimalist portfolio website inspired by modern editorial layouts.">
-    <title>PORTFOLIO - Landing</title>
+    <title>Project CH&F</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -37,7 +37,8 @@
         style="padding-left: 0; padding-right: 0; padding-bottom: 0; padding-top: 80px; margin-top: 0; position: relative; background-color: #f7f7f5; overflow: hidden;">
 
         <div class="landing-title-container">
-            <h2 class="landing-title" id="dynamic-landing-title1">mon<span class="highlight-text" id="dynamic-landing-title2">thly Frame_APT</span></h2>
+            <h2 class="landing-title" id="dynamic-landing-title1">mon<span class="highlight-text"
+                    id="dynamic-landing-title2">thly Frame_APT</span></h2>
         </div>
 
         <section class="gallery carousel-container"
@@ -71,12 +72,12 @@
                     if (settingsPages.length > 0) {
                         const page = settingsPages[0];
                         const acf = page.acf || {};
-                        
+
                         // ACF 필드명 (landing_title1, landing_title2 등을 확인하여 맵핑)
                         // 입력값이 없으면 기본값 유지
                         const title1 = acf.landing_title1 || acf['landing title1'] || acf.landingtitle1;
                         const title2 = acf.landing_title2 || acf['landing title2'] || acf.landingtitle2;
-                        
+
                         if (title1) document.getElementById('dynamic-landing-title1').firstChild.textContent = title1;
                         if (title2) document.getElementById('dynamic-landing-title2').textContent = title2;
                     }
@@ -129,7 +130,7 @@
                 const acf = slide.acf || {};
                 const architect = acf.architect || acf.archiect || acf.architecture || '';
                 const year = acf.year || '';
-                
+
                 let metaText = '';
                 if (architect && year) metaText = `${architect} / ${year}`;
                 else if (architect) metaText = architect;
@@ -164,12 +165,12 @@
             const trackContainer = document.querySelector('.carousel-track-container');
             const track = document.getElementById('dynamic-carousel-track');
             const originalSlidesCount = track.children.length;
-            
-            if(originalSlidesCount <= 0) return;
-            if(originalSlidesCount === 1) {
+
+            if (originalSlidesCount <= 0) return;
+            if (originalSlidesCount === 1) {
                 // 1장이면 중앙 정렬하고 스크롤 제거
                 trackContainer.style.overflowX = 'hidden';
-                return; 
+                return;
             }
 
             const slidesArray = Array.from(track.children);
@@ -184,7 +185,7 @@
             // Setup Carousel Dots
             const indicatorsContainer = document.getElementById('dynamic-carousel-indicators');
             indicatorsContainer.innerHTML = ''; // 초기화
-            
+
             const dots = [];
             for (let i = 0; i < originalSlidesCount; i++) {
                 const dot = document.createElement('div');

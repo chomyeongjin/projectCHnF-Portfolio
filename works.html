@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A minimalist portfolio website inspired by modern editorial layouts.">
-    <title>PORTFOLIO - Works</title>
+    <title>Project CH&F - Works</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -60,7 +61,6 @@
         <section class="gallery">
             <div class="uniform-grid" id="works-grid">
                 <!-- 자바스크립트를 통해 워드프레스 데이터가 여기에 렌더링됩니다 -->
-                <div class="loading-spinner">포트폴리오 데이터를 불러오는 중입니다...</div>
             </div>
         </section>
     </main>
@@ -109,7 +109,7 @@
         // 2. 워드프레스 API 연동 및 렌더링 로직 (Headless WP)
         // --------------------------------------------------------
         const WP_API_URL = 'https://chinhyosook.com/wp-json/wp/v2';
-        
+
         let allProjects = []; // 서버에서 불러온 전체 프로젝트 데이터
         let activeLocations = new Set(['all']);
         let activeTags = new Set(['all']);
@@ -158,7 +158,7 @@
                 // _embed 파라미터를 추가하면 썸네일(Featured Image) 정보도 같이 가져옵니다.
                 const response = await fetch(`${WP_API_URL}/work?_embed&per_page=100`);
                 if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다.');
-                
+
                 allProjects = await response.json();
                 sortProjectsByYear(allProjects);
             } catch (error) {
@@ -179,17 +179,17 @@
 
             projects.forEach(project => {
                 const acf = project.acf || {};
-                
+
                 // 데이터 추출 (ACF 필드 이름 매핑)
                 const title = project.title.rendered;
                 const architect = acf.architect || acf.archiect || acf.architecture || 'Unknown Architect';
                 const year = acf.year || '';
                 const place = acf.place || 'Unknown Place';
-                
+
                 // 이미지 추출 로직: 워드프레스 ACF 썸네일 우선, 없으면 WP 기본 특성 미디어
                 let imageUrl = './sources/Logo.png'; // 기본 이미지
                 const acfThumb = acf.thumbnail || acf.thumnail; // 오타 방어
-                
+
                 if (acfThumb && typeof acfThumb === 'string') {
                     imageUrl = acfThumb; // ACF 이미지 필드 URL
                 } else if (acf.featured_image_url) {
@@ -237,7 +237,7 @@
             projects.forEach(project => {
                 const acf = project.acf || {};
                 if (acf.place) places.add(acf.place);
-                
+
                 if (acf.tag) {
                     acf.tag.split(',').forEach(t => tags.add(t.trim()));
                 } else if (project._embedded && project._embedded['wp:term']) {
@@ -352,7 +352,7 @@
             const allGridItems = document.querySelectorAll('.grid-item');
             const hasLocationFilter = !activeLocations.has('all');
             const hasTagFilter = !activeTags.has('all');
-            
+
             allGridItems.forEach(item => {
                 const itemLocation = item.getAttribute('data-location');
                 const itemTag = item.getAttribute('data-tag');
@@ -379,4 +379,5 @@
 
     </script>
 </body>
+
 </html>
