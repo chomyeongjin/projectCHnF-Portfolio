@@ -8,13 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=9">
     <link rel="icon" type="image/png" href="./sources/favicon.png">
-    <style>
-        .contact-info-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -37,31 +30,29 @@
     <main class="main-content about-page" id="main-content">
         <div class="about-container">
             <h2 class="about-title">Contact us</h2>
-            <div class="about-content contact-layout">
-                <div class="contact-top-row">
-                    <div class="contact-block">
-                        <h4>Address.</h4>
-                        <div id="address-field">
-                            <!-- JS에서 주소 렌더링 -->
-                        </div>
+            <div class="about-content contact-layout" style="display: flex; flex-direction: column; gap: 3rem;">
+                <div class="contact-block">
+                    <h4>Address.</h4>
+                    <div id="address-field">
+                        <!-- JS에서 주소 렌더링 -->
                     </div>
+                </div>
 
-                    <div class="contact-info-list">
-                        <div class="contact-block">
-                            <h4>Phone.</h4>
-                            <p id="phone-field"><!-- JS에서 전화번호 렌더링 --></p>
-                        </div>
-                        <div class="contact-block">
-                            <h4>E-mail.</h4>
-                            <p id="email-field"><!-- JS에서 이메일 렌더링 --></p>
-                        </div>
-                        <div class="contact-block">
-                            <h4>Instagram.</h4>
-                            <p id="instagram-field">
-                                <!-- JS에서 인스타그램 렌더링 -->
-                            </p>
-                        </div>
-                    </div>
+                <div class="contact-block">
+                    <h4>Phone.</h4>
+                    <p id="phone-field"><!-- JS에서 전화번호 렌더링 --></p>
+                </div>
+
+                <div class="contact-block">
+                    <h4>E-mail.</h4>
+                    <p id="email-field"><!-- JS에서 이메일 렌더링 --></p>
+                </div>
+
+                <div class="contact-block">
+                    <h4>Instagram.</h4>
+                    <p id="instagram-field">
+                        <!-- JS에서 인스타그램 렌더링 -->
+                    </p>
                 </div>
 
                 <div class="contact-copyright"
