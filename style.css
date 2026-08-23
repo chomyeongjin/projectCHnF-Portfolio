@@ -38,7 +38,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 16px var(--spacing) 12px 1.2rem;
+    padding: 14px var(--spacing) 14px 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,17 +56,18 @@ a {
 }
 
 .logo a {
-    display: inline-block;
-    height: 54px;
+    display: flex;
+    align-items: center;
+    height: auto;
 }
 
 .logo img {
-    height: 76px;
+    height: 54px;
     width: auto;
     object-fit: contain;
     display: block;
-    margin-top: -9px;
-    margin-left: -6px;
+    margin-top: 0;
+    margin-left: -5px;
 }
 
 .page-title {
