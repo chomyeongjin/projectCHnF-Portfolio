@@ -38,7 +38,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 19px var(--spacing) 12px var(--spacing);
+    padding: 16px var(--spacing) 12px 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +58,6 @@ a {
 .logo a {
     display: inline-block;
     height: 54px;
-    overflow: hidden;
 }
 
 .logo img {
@@ -66,8 +65,8 @@ a {
     width: auto;
     object-fit: contain;
     display: block;
-    margin-top: -18px;
-    margin-left: -14px;
+    margin-top: -9px;
+    margin-left: -6px;
 }
 
 .page-title {
