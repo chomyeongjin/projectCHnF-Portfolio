@@ -244,6 +244,10 @@ a {
     transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+.main-content.project-detail {
+    padding-top: 135px;
+}
+
 #landing-main.shifted {
     transform: translateY(90px);
 }
