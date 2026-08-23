@@ -245,7 +245,7 @@ a {
 }
 
 .main-content.project-detail {
-    padding-top: 95px;
+    padding-top: 90px;
 }
 
 #landing-main.shifted {
@@ -534,12 +534,12 @@ body:has(.nav-links.active) .main-content {
 .project-detail {
     max-width: 1320px;
     margin: 0 auto;
-    padding-top: 95px;
+    padding-top: 90px;
 }
 
 .project-detail .carousel-container {
-    height: calc(100vh - 130px);
-    min-height: 480px;
+    height: calc(100vh - 90px);
+    min-height: 500px;
 }
 
 .project-detail .carousel-indicators {
