@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./style.css?v=16">
+    <link rel="stylesheet" href="./style.css?v=17">
     <link rel="icon" type="image/png" href="./sources/favicon.png?v=3">
 </head>
 
@@ -36,7 +36,7 @@
     <main class="main-content" id="landing-main"
         style="padding-left: 0; padding-right: 0; padding-bottom: 0; padding-top: 80px; margin-top: 0; position: relative; background-color: #f7f7f5; overflow: hidden;">
 
-        <div class="landing-title-container">
+        <div class="landing-title-container" id="dynamic-landing-title-container">
             <h2 class="landing-title" id="dynamic-landing-title1">mon<span class="highlight-text"
                     id="dynamic-landing-title2">thly Frame_APT</span></h2>
         </div>
@@ -73,13 +73,38 @@
                         const page = settingsPages[0];
                         const acf = page.acf || {};
 
-                        // ACF 필드명 (landing_title1, landing_title2 등을 확인하여 맵핑)
-                        // 입력값이 없으면 기본값 유지
+                        // ACF 텍스트 필드
                         const title1 = acf.landing_title1 || acf['landing title1'] || acf.landingtitle1;
                         const title2 = acf.landing_title2 || acf['landing title2'] || acf.landingtitle2;
 
                         if (title1) document.getElementById('dynamic-landing-title1').firstChild.textContent = title1;
                         if (title2) document.getElementById('dynamic-landing-title2').textContent = title2;
+
+                        // ACF 색상 선택기 필드
+                        const title1Color = acf.title1_colour || acf.title1_color || acf['title1 colour'] || acf['title1 color'];
+                        const title2Color = acf.title2_colour || acf.title2_color || acf['title2 colour'] || acf['title2 color'];
+                        const circleColor = acf.circle_behind_title || acf['circle/behind title'] || acf.circle_behind_title_colour || acf.circle_color;
+                        const bgColor = acf.background_colour || acf.background_color || acf['background colour'] || acf['background color'];
+
+                        if (title1Color) {
+                            document.getElementById('dynamic-landing-title1').style.color = title1Color;
+                        }
+                        if (title2Color) {
+                            document.getElementById('dynamic-landing-title2').style.color = title2Color;
+                        }
+                        if (circleColor) {
+                            const titleContainer = document.getElementById('dynamic-landing-title-container');
+                            if (titleContainer) {
+                                titleContainer.style.setProperty('--circle-bg', circleColor);
+                            }
+                        }
+                        if (bgColor) {
+                            const landingMain = document.getElementById('landing-main');
+                            if (landingMain) {
+                                landingMain.style.backgroundColor = bgColor;
+                            }
+                            document.body.style.backgroundColor = bgColor;
+                        }
                     }
                 }
 
