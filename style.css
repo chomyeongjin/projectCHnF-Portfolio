@@ -185,15 +185,15 @@ a {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #111111;
+    color: var(--menu-btn-color, #111111);
     text-decoration: underline;
     text-underline-offset: 4px;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .landing-menu-toggle-btn:hover {
-    color: var(--accent-color);
+    opacity: 0.7;
 }
 
 /* 
@@ -719,6 +719,23 @@ body:has(.nav-links.active) .main-content {
     transform: scale(1.2);
 }
 
+/* Landing Dynamic Indicators with custom color support */
+#dynamic-carousel-indicators .carousel-dot {
+    background-color: var(--indicator-color, #000000);
+    opacity: 0.25;
+}
+
+#dynamic-carousel-indicators .carousel-dot:hover {
+    background-color: var(--indicator-color, #000000);
+    opacity: 0.55;
+}
+
+#dynamic-carousel-indicators .carousel-dot.active {
+    background-color: var(--indicator-color, #000000);
+    opacity: 0.9;
+    transform: scale(1.2);
+}
+
 .carousel-track {
     padding: 0;
     margin: 0;
@@ -800,18 +817,20 @@ body:has(.nav-links.active) .main-content {
     justify-content: center;
     align-items: baseline;
     gap: 0.6rem;
-    color: var(--text-color);
+    color: var(--photo-info-color, var(--text-color));
 }
 
 .landing-project-info .project-name {
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.08em;
+    color: var(--photo-info-color, var(--text-color));
 }
 
 .landing-project-info .project-meta {
     font-size: 0.75rem;
-    color: var(--accent-color);
+    color: var(--photo-info-color, var(--accent-color));
+    opacity: 0.85;
     letter-spacing: 0.05em;
 }
 

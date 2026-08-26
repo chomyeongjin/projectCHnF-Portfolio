@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@300;400;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./style.css?v=17">
+    <link rel="stylesheet" href="./style.css?v=18">
     <link rel="icon" type="image/png" href="./sources/favicon.png?v=3">
 </head>
 
@@ -85,6 +85,9 @@
                         const title2Color = acf.title2_colour || acf.title2_color || acf['title2 colour'] || acf['title2 color'];
                         const circleColor = acf.circle_behind_title || acf['circle/behind title'] || acf.circle_behind_title_colour || acf.circle_color;
                         const bgColor = acf.background_colour || acf.background_color || acf['background colour'] || acf['background color'];
+                        const photoInfoColor = acf.photo_info_colour || acf.photo_info_color || acf['photo info colour'] || acf['photo info color'];
+                        const indicatorColor = acf.indicator_colour || acf.indicator_color || acf['indicator colour'] || acf['indicator color'];
+                        const menuBtnColor = acf.menu_btn_colour || acf.menu_btn_color || acf['menu btn colour'] || acf['menu btn color'];
 
                         if (title1Color) {
                             document.getElementById('dynamic-landing-title1').style.color = title1Color;
@@ -104,6 +107,25 @@
                                 landingMain.style.backgroundColor = bgColor;
                             }
                             document.body.style.backgroundColor = bgColor;
+                        }
+                        if (photoInfoColor) {
+                            const landingMain = document.getElementById('landing-main');
+                            if (landingMain) {
+                                landingMain.style.setProperty('--photo-info-color', photoInfoColor);
+                            }
+                        }
+                        if (indicatorColor) {
+                            const indicatorsContainer = document.getElementById('dynamic-carousel-indicators');
+                            if (indicatorsContainer) {
+                                indicatorsContainer.style.setProperty('--indicator-color', indicatorColor);
+                            }
+                        }
+                        if (menuBtnColor) {
+                            const toggleBtn = document.getElementById('landing-menu-toggle-btn');
+                            if (toggleBtn) {
+                                toggleBtn.style.color = menuBtnColor;
+                                toggleBtn.style.setProperty('--menu-btn-color', menuBtnColor);
+                            }
                         }
                     }
                 }
