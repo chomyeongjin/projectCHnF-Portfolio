@@ -201,19 +201,20 @@ a {
 */
 .landing-title-container {
     position: absolute;
-    top: 5vh;
-    left: max(36px, 5vw);
+    top: 4.5vh;
+    left: 45px;
     z-index: 10;
+    max-width: calc(100vw - 60px);
 }
 
 .landing-title-container::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: -19px;
+    left: -20px;
     transform: translateY(-50%);
-    width: 85px;
-    height: 85px;
+    width: 80px;
+    height: 80px;
     background-color: var(--circle-bg, #111111);
     border-radius: 50%;
     z-index: 0;
@@ -223,9 +224,9 @@ a {
     position: relative;
     z-index: 1;
     font-family: 'IBM Plex Mono', Courier, monospace;
-    font-size: 1.7rem;
+    font-size: clamp(0.85rem, 2.2vw, 1.6rem);
     font-weight: 600;
-    letter-spacing: 0.35em;
+    letter-spacing: clamp(0.12em, 0.28em, 0.35em);
     color: #f7f7f5;
     margin: 0;
     white-space: nowrap;
@@ -770,7 +771,7 @@ body:has(.nav-links.active) .main-content {
 @media (max-aspect-ratio: 1/1) {
     .landing-title-container {
         top: 2.5vh;
-        left: 32px;
+        left: 35px;
     }
 
     .carousel-slide img.landing-img {
@@ -782,18 +783,19 @@ body:has(.nav-links.active) .main-content {
 @media (max-width: 768px) {
     .landing-title-container {
         top: 20px;
-        left: 30px;
+        left: 28px;
+        max-width: calc(100vw - 40px);
     }
 
     .landing-title {
-        font-size: 1.05rem;
-        letter-spacing: 0.18em;
+        font-size: clamp(0.7rem, 3.6vw, 1.1rem);
+        letter-spacing: clamp(0.08em, 0.16em, 0.2em);
     }
 
     .landing-title-container::before {
-        width: 58px;
-        height: 58px;
-        left: -12px;
+        width: 52px;
+        height: 52px;
+        left: -10px;
     }
 
     .carousel-slide {
