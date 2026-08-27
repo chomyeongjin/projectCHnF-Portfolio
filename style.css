@@ -202,7 +202,7 @@ a {
 .landing-title-container {
     position: absolute;
     top: 5vh;
-    left: 6vw;
+    left: max(36px, 5vw);
     z-index: 10;
 }
 
@@ -770,6 +770,7 @@ body:has(.nav-links.active) .main-content {
 @media (max-aspect-ratio: 1/1) {
     .landing-title-container {
         top: 2.5vh;
+        left: 32px;
     }
 
     .carousel-slide img.landing-img {
@@ -780,18 +781,18 @@ body:has(.nav-links.active) .main-content {
 
 @media (max-width: 768px) {
     .landing-title-container {
-        top: 2.5vh;
-        left: 4vw;
+        top: 20px;
+        left: 30px;
     }
 
     .landing-title {
-        font-size: 1.15rem;
-        letter-spacing: 0.22em;
+        font-size: 1.05rem;
+        letter-spacing: 0.18em;
     }
 
     .landing-title-container::before {
-        width: 60px;
-        height: 60px;
+        width: 58px;
+        height: 58px;
         left: -12px;
     }
 
