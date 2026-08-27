@@ -765,6 +765,13 @@ body:has(.nav-links.active) .main-content {
     margin-top: 5.5vh;
 }
 
+@media (max-aspect-ratio: 1/1) {
+    .carousel-slide img.landing-img {
+        max-height: 68vh;
+        margin-top: 11vh;
+    }
+}
+
 @media (max-width: 768px) {
     .carousel-slide {
         overflow: hidden;
@@ -774,6 +781,7 @@ body:has(.nav-links.active) .main-content {
         width: 100% !important;
         height: auto !important;
         max-width: 100vw !important;
+        max-height: 65vh !important;
         margin-top: auto !important;
     }
 
